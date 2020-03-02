@@ -36,6 +36,9 @@ Build and Run the application with:
 ```bash
 docker-compose up
 ```
+## Swagger 
+
+After successfuly installation, API design could investigate with swagger on: http://localhost:8080/v1/swagger-ui.html#/
 
 ## Usage
 
