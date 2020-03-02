@@ -34,6 +34,12 @@ public class DefaultContentDiffService implements ContentDiffService {
     }
 
 
+    /**
+     * Generates results for current situation according to scenario and keep current situation at the cache.
+     * In case of any updates happened at one of the child contents, this result will be evicted from the cache.
+     * @param id given root id
+     * @return ContentsDiffResult
+     */
     public ContentsDiffResult findResultsOf(String id) {
         ContentsDiffResult cacheHit = cache.getEntry(id);
         if (cacheHit != null)
@@ -51,6 +57,15 @@ public class DefaultContentDiffService implements ContentDiffService {
         return result;
     }
 
+    /**
+     * If equal returns @ComparisonResult.EQUAL
+     * If not of equal size returns @ComparisonResult.SIZE_NOT_MATCH
+     * If contents of children's are in same size but not equal as a binary string,
+     * returns lists of offsets and length with @ComparisonResult.NOT_EQUAL
+     * @param leftContent
+     * @param rightContent
+     * @return
+     */
     private ContentsDiffResult calculateDiff(Content leftContent, Content rightContent) {
         ContentsDiffResult.Builder builder = new ContentsDiffResult.Builder().setId(leftContent.getRootId());
         if (leftContent.getHash().equals(rightContent.getHash()))
