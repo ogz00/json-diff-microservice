@@ -134,7 +134,7 @@ If contents of children's equal in both of size and data, returns:
 ## Hashing and Cache Implementation
 MD5 Hashing algorithm used for generate cache key with combination of root id and target child value. With this implementation, probability of duplication on cache has minimized.
 
-LRU Cache logic has used and implemented with LinkedList logic and HashMap Data-Structure. Because of the current implementation just for conceptual design, this cache developed to be capable of holding different types of object with Java Generic implementation.
+LRU Cache logic has used and implemented with LinkedList logic and HashMap Data-Structure. Because of the current implementation just for conceptual design, this cache developed to be capable of holding different types of object with Java Generic implementation. Currently cache size given statically inside of the code but It could change with adding new environment variable to docker-compose file.
 
 ## Testing
 Spring-Rest and Service tests are implemented appropriately.
