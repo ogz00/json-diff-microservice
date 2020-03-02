@@ -1,0 +1,36 @@
+version: '3.7'
+networks:
+  application:
+    driver: bridge
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    volumes:
+      - $HOME/data/mongo-data:/data/db
+      - $HOME/data/mongo-bkp:/data/bkp
+    ports:
+      - 27017:27017
+    networks:
+      - application
+
+  waes-scalable-api:
+    build: .
+    working_dir: /app
+    container_name: waes-scalable-web
+    environment:
+      SPRING_APPLICATION_JSON: '{
+      "server.servlet.context-path": "/v1",
+           "spring":
+              {"data":
+                  {"mongodb":
+                      {"host": "mongo"}}}
+         }'
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - mongo
+    networks:
+      - application
