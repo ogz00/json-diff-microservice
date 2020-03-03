@@ -60,6 +60,7 @@ curl -X POST \
 }'
   ```
 If requested id exists at the system find last version of that content and update it's data iteratively. Else create new content with desired id and persist this value for both **LRUCache** and **MongoDB**.
+Besides of that, system generates a md5 hash string from current content and uses this hash value when the diff request happens. 
 
 This api provides current value of the content like this:
 ```
